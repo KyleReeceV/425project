@@ -3,31 +3,15 @@ import secrets
 from PIL import Image
 from flask import render_template, url_for, flash, redirect, request
 from flaskapp import app, db, bcrypt
-from flaskapp.forms import RegistrationForm, LoginForm, UpdateAccountForm
+from flaskapp.forms import RegistrationForm, LoginForm, UpdateAccountForm, PostForm
 from flaskapp.models import User, Post
 from flask_login import login_user, current_user, logout_user, login_required
-
-#-dummy data
-posts = [ 
-    {
-        'author': 'Kyle Reece',
-        'title': 'Post 1',
-        'content': 'first post content',
-        'date_posted': 'March 24, 2020'
-    },
-    {
-        'author': 'Not Kyle',
-        'title': 'Post 2',
-        'content': 'second post content',
-        'date_posted': 'March 25, 2020'
-    }
-]
-
 
 #-routes
 @app.route("/")
 @app.route("/home")
 def home():
+    posts = Post.query.all()
     return render_template('home.html', posts=posts)
 
 @app.route("/about")
@@ -100,3 +84,28 @@ def account():
         form.email.data = current_user.email
     img_file = url_for('static', filename='profile_pics/' + current_user.profile_pic)
     return render_template('account.html', title='Account', img_file=img_file, form=form)
+
+@app.route("/post/new", methods=['GET', 'POST'])
+@login_required
+def new_post():
+    form = PostForm()
+    if form.validate_on_submit():
+        post = Post(title=form.title.data, content=form.content.data, author=current_user)
+        db.session.add(post)
+        db.session.commit()
+        flash('Your post has been created!', 'success')
+        return redirect(url_for('home'))
+    return render_template('create_post.html', title='New Post', form=form)
+
+@app.route("/post/<int:post_id>")
+def post(post_id):
+    post = Post.query.get_or_404(post_id)
+    return render_template('post.html', title='post.title', post=post)
+
+@app.route("/event_calendar")
+def event_calendar():
+    return render_template('home.html', title='Calendar')
+
+@app.route("/locations")
+def locations():
+    return render_template('home.html', title='Locations')

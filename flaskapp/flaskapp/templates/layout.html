@@ -28,6 +28,7 @@
                         </div>
                         <div class="navbar-nav">
                             {% if current_user.is_authenticated %}
+                                <a class="nav-item nav-link" href="{{ url_for('new_post') }}">New Post</a>
                                 <a class="nav-item nav-link" href="{{ url_for('account') }}">Account</a>
                                 <a class="nav-item nav-link" href="{{ url_for('logout') }}">Logout</a>
                             {% else %}
@@ -56,11 +57,11 @@
                 <div class="col-md-4">
                     <div class="content-section">
                     <h3>Menu</h3>
-                        <p class='text-muted'>Explore
+                        <p class='text-muted'>
                             <ul class="list-group">
-                                <li class="list-group-item list-group-item-light lis">Latest Posts</li>
-                                <li class="list-group-item list-group-item-light lis">Calendars</li>
-                                <li class="list-group-item list-group-item-light lis">Locations</li>
+                                <button class="btn btn-outline-info"><a class="nc" href="{{ url_for('home')}}">Latest Posts</button><br />
+                                <button class="btn btn-outline-info"><a class="nc" href="{{ url_for('event_calendar')}}">Calendars</button><br />
+                                <button class="btn btn-outline-info"><a class="nc" href="{{ url_for('locations')}}">Locations</button>
                             </ul>
                         </p>
                     </div>
