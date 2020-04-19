@@ -6,8 +6,9 @@
         <img src="{{ url_for('static', filename='profile_pics/' + post.author.profile_pic) }}" class="rounded-circle article-img">
         <div class="media-body">
             <div class="article-metadata">
-                <a class="mr-2" href="#">{{ post.author.username }}</a>
-                <small class="text-muted">{{ post.date_posted.strftime('%B %d, %Y at %I:%M %p') }}</small>
+                <a class="mr-2" href="#">{{ post.author.username }}</a><br />
+                <small class="text-muted">Posted: {{ post.date_posted.strftime('%B %d, %Y at %I:%M %p') }}</small><br />
+                <small class="text-muted">Updated: {{ post.date_updated.strftime('%B %d, %Y at %I:%M %p') }}</small>
             </div>
             <h2><a class="article-title" href="{{ url_for('post', post_id=post.id) }}">{{ post.title }}</a></h2>
             <p class="article-content">{{ post.content }}</p>

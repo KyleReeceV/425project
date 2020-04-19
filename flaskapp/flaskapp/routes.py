@@ -113,7 +113,7 @@ def update_post(post_id):
     if form.validate_on_submit():
         post.title = form.title.data
         post.content = form.content.data
-        post.date_posted = datetime.now(tz=None)
+        post.date_updated = datetime.now(tz=None)
         db.session.commit()
         flash('Your post has been updated!', 'success')
         return redirect(url_for('post', post_id=post.id))
