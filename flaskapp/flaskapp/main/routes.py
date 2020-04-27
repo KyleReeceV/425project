@@ -1,7 +1,7 @@
 from flask import render_template, request, Blueprint
 from flaskapp.models import Post
 
-main = Blueprint('main',__name__)
+main = Blueprint('main', __name__)
 
 @main.route("/")
 @main.route("/home")

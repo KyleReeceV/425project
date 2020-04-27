@@ -2,7 +2,7 @@ from flask import render_template, url_for, flash, redirect, request, Blueprint
 from flask_login import login_user, current_user, logout_user, login_required
 from flaskapp import db, bcrypt
 from flaskapp.models import User, Post
-from flaskapp.users.forms import RegistrationForm, LoginForm, UpdateAccountForm, RequestResetForm, ResetPassswordForm
+from flaskapp.users.forms import RegistrationForm, LoginForm, UpdateAccountForm, RequestResetForm, ResetPasswordForm
 from flaskapp.users.utils import save_picture, send_reset_email
 
 users = Blueprint('users', __name__)
@@ -11,7 +11,7 @@ users = Blueprint('users', __name__)
 @users.route("/register", methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
-        return redirect(url_for('main.home))
+        return redirect(url_for('main.home'))
     form = RegistrationForm()
     if form.validate_on_submit():
         hashed_pw = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
@@ -25,14 +25,14 @@ def register():
 @users.route("/login", methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('main.home))
+        return redirect(url_for('main.home'))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
             next_page = request.args.get('next')
-            return redirect(next_page) if next_page else redirect(url_for('main.home))
+            return redirect(next_page) if next_page else redirect(url_for('main.home'))
         else:
             flash('Incorrect email or password. Try again.', category='danger')
     return render_template('login.html', title='Login', form=form)
@@ -40,7 +40,7 @@ def login():
 @users.route("/logout")
 def logout():
     logout_user()
-    return redirect(url_for('main.home))
+    return redirect(url_for('main.home'))
 
 @users.route("/account", methods=['GET', 'POST'])
 @login_required
@@ -71,7 +71,7 @@ def user_posts(username):
 @users.route("/reset_password", methods=['GET', 'POST'])
 def reset_request():
     if current_user.is_authenticated:
-        return redirect(url_for('main.home))
+        return redirect(url_for('main.home'))
     form = RequestResetForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
@@ -83,7 +83,7 @@ def reset_request():
 @users.route("/reset_password/<token>", methods=['GET', 'POST'])
 def reset_token(token):
     if current_user.is_authenticated:
-        return redirect(url_for('main.home))
+        return redirect(url_for('main.home'))
     user = User.verify_reset_token(token)
     if user is None:
         flash('That is an invalid or expired token.', 'warning')
