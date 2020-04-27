@@ -7,7 +7,11 @@ main = Blueprint('main', __name__)
 @main.route("/")
 @main.route("/home")
 def home():
-    return render_template('home.html')
+    home_imgs = [url_for('static',filename='home_images/' + 'h_img1.png'),
+                url_for('static', filename='home_images/' + 'h_img2.png'),
+                url_for('static', filename='home_images/' + 'h_img3.png'),
+                url_for('static', filename='home_images/' + 'h_img4.png') ]
+    return render_template('home.html', home_imgs=home_imgs)
 
 @main.route("/blog")
 def blog():

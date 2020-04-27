@@ -54,18 +54,32 @@
                 {% endwith %}
                 {% block content %}{% endblock %}
                 </div>
-                <div class="col-md-3">
-                    <div class="content-section">
-                    <h3>Menu</h3>
-                        <p class='text-muted'>
-                            <ul class="list-group">
-                                <button class="btn btn-outline-info"><a class="nc" href="{{ url_for('main.blog')}}">Blog Posts</button><br />
-                                <button class="btn btn-outline-info"><a class="nc" href="{{ url_for('main.event_calendar')}}">Calendars</button><br />
-                                <button class="btn btn-outline-info"><a class="nc" href="{{ url_for('main.locations')}}">Locations</button>
-                            </ul>
-                        </p>
+                {% if request.url_rule.endpoint != "main.home" %}
+                    <div class="col-md-3">
+                        <div class="content-section">
+                        <h3>Menu</h3>
+                            <p class='text-muted'>
+                                <ul class="list-group">
+                                    <button class="btn btn-outline-info"><a class="nc" href="{{ url_for('main.blog')}}">Blog Posts</button><br />
+                                    <button class="btn btn-outline-info"><a class="nc" href="{{ url_for('main.event_calendar')}}">Calendars</button><br />
+                                    <button class="btn btn-outline-info"><a class="nc" href="{{ url_for('main.locations')}}">Locations</button>
+                                </ul>
+                            </p>
+                        </div>
                     </div>
-                </div>
+                {% else %}
+                    <div class="col-md-3">
+                        <div class="content-section">
+                        <h3>About Us</h3>
+                        <hr width="85%" />
+                            <p class='text-muted'>
+                                <ul class="list-group">
+                                    <p>The New River Valley is located in southern Virginia and contains 5 distinct counties that offer so much to do and see!</p>
+                                </ul>
+                            </p>
+                        </div>
+                    </div>
+                {% endif %}
             </div>
         </main>
 
