@@ -1,4 +1,5 @@
-from flask import render_template, request, Blueprint
+from flask import render_template, request, url_for, Blueprint
+from flask_login import login_required
 from flaskapp.models import Post
 
 main = Blueprint('main', __name__)
@@ -16,9 +17,15 @@ def about():
     return render_template('about.html', title='About')
 
 @main.route("/event_calendar")
+@login_required
 def event_calendar():
-    return render_template('about.html', title='Calendar')
+    return render_template('events.html', title='Calendar')
 
 @main.route("/locations")
 def locations():
-    return render_template('about.html', title='Locations')
+    loc_imgs = [url_for('static', filename='loc_images/' + 'img1.jpg'),
+                url_for('static', filename='loc_images/' + 'img2.jpg'),
+                url_for('static', filename='loc_images/' + 'img3.jpg'),
+                url_for('static', filename='loc_images/' + 'img4.jpg'),
+                url_for('static', filename='loc_images/' + 'img5.jpg') ]
+    return render_template('locations.html', title='Locations', loc_imgs=loc_imgs)
