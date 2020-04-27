@@ -33,3 +33,7 @@ def locations():
                 url_for('static', filename='loc_images/' + 'img4.jpg'),
                 url_for('static', filename='loc_images/' + 'img5.jpg') ]
     return render_template('locations.html', title='Locations', loc_imgs=loc_imgs)
+
+@main.route("/contact")
+def contact():
+    return render_template('contact.html', title="Contact Us!")
