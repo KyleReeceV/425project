@@ -3,6 +3,7 @@ from flask_login import current_user, login_required
 from flaskapp import db
 from flaskapp.models import Post
 from flaskapp.posts.forms import PostForm
+from datetime import datetime
 
 posts = Blueprint('posts',__name__)
 
