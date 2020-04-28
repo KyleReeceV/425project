@@ -55,14 +55,15 @@
                 {% block content %}{% endblock %}
                 </div>
                 {% if request.url_rule.endpoint != "main.home" %}
-                    <div class="col-md-3">
+                    <div class="col-md-3 ml-5 pl-5">
                         <div class="content-section">
                         <h3>Menu</h3>
+                        <hr width="85%" />
                             <p class='text-muted'>
                                 <ul class="list-group">
-                                    <button class="btn btn-outline-info"><a class="nc" href="{{ url_for('main.blog')}}">Blog Posts</button><br />
-                                    <button class="btn btn-outline-info"><a class="nc" href="{{ url_for('main.event_calendar')}}">Calendars</button><br />
-                                    <button class="btn btn-outline-info"><a class="nc" href="{{ url_for('main.locations')}}">Locations</button>
+                                    <a class="nc" href="{{ url_for('main.blog')}}"><button class="btn btn-outline-info" style="width: 180px;">Blog</button></a><br />
+                                    <a class="nc" href="{{ url_for('main.event_calendar')}}"><button class="btn btn-outline-info" style="width: 180px;">Calendar</button></a><br />
+                                    <a class="nc" href="{{ url_for('main.locations')}}"><button class="btn btn-outline-info" style="width: 180px;">Locations</button></a>
                                 </ul>
                             </p>
                         </div>
