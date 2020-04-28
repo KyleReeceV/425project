@@ -1,4 +1,12 @@
 {% extends "layout.html" %}
 {% block content %}
     <h1>Events Page </h1>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <iframe src="https://calendar.google.com/calendar/b/1/embed?height=600&amp;wkst=1&amp;bgcolor=%2332a852&amp;ctz=America%2FNew_York&amp;src=bnJ2ZXhwcmVzc3NoYXJlZGNhbGVuZGFyQGdtYWlsLmNvbQ&amp;src=ZmxveWRjb3VudHlzaGFyZWRjYWxlbmRhckBnbWFpbC5jb20&amp;src=Z2lsZXNzaGFyZWRjYWxlbmRhckBnbWFpbC5jb20&amp;src=bW9udGdvbWVyeW5ydnNoYXJlZGNhbGVuZGFyQGdtYWlsLmNvbQ&amp;src=cHVsYXNraXNoYXJlZGNhbGVuZGFyQGdtYWlsLmNvbQ&amp;src=cmFkZm9yZGdyb3VwY2FsZW5kYXJAZ21haWwuY29t&amp;color=%23039BE5&amp;color=%23EF6C00&amp;color=%23C0CA33&amp;color=%23616161&amp;color=%23F4511E&amp;color=%23E4C441&amp;showTabs=0&amp;showPrint=0&amp;showDate=1&amp;showNav=1&amp;showTz=0" style="border-width:0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+                <a href="{{ url_for('main.contact') }}">Contact us</a> to learn how to host an event for your community!
+            </div>
+        </div>
+    </div>
 {% endblock content %}
